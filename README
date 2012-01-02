@@ -1,0 +1,2 @@
+{compressor : "java -jar test/support/yuicompressor-2.4.7.jar"}
+
