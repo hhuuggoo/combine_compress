@@ -1,2 +1,24 @@
-{compressor : "java -jar test/support/yuicompressor-2.4.7.jar"}
+config file structure:
+
+[{
+    name : 'base'
+    compressor : "java -jar test/support/yuicompressor-2.4.7.jar",
+    inputs : ['first.js', 'second.js']
+    output : 'base.min.js'
+    html_dirs : ['templates', 'static/html']
+}]
+
+html between these comments will be replaced
+<!-- start base -->
+    <link rel="stylesheet" type="text/css" 
+	  href="/static/themes/base/jquery.ui.all.css">
+    <link rel="stylesheet" href="/static/css/base.css" type="text/css" >
+    <link rel="stylesheet" href="/static/css/skeleton.css" type="text/css" >
+    <link rel="stylesheet" href="/static/css/layout.css" type="text/css" >
+    <link rel="stylesheet" href="/static/css/outline.css" type="text/css" >
+    <link rel="stylesheet" href="/static/css/nav.css" type="text/css" >
+<!-- end base -->
+<!-- start base -->
+    <link rel="stylesheet" href="/static/css/base.min.css" type="text/css" >
+<!-- end base -->
 

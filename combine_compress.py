@@ -22,12 +22,14 @@ def cat(output, inputs):
                 shutil.copyfileobj(infile, outfile)
 
 
-def combine_compress(confobj):
-    js_compressor_cmd = confobj['compressor_js']
-    css_compressor_cmd = confobj['compressor_css']
-    css_outputs = confobj.get('css', {})
-    js_outputs = confobj.get('js', {})
-    
+def combine_confobjs(confobjs):
+    for confobj in confobjs:
+        cat(confobj['output'], confobj['inputs'])
+        
+def combine_compress(confobjs):
+    for confobj in confobjs:
+        cat(confobj['output'], confobj['inputs'])
+        minfile(confobj['output'], confobj['output'], confobj['compressor'])
     
 if __name__ == "__main__":
     conffile = sys.argv[1]
