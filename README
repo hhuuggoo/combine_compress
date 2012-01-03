@@ -1,6 +1,6 @@
 combine and compress is a utility to help combine and minimize css and js files, for those people who don't use frameworks with those capabilities built in.  It should work with any framework, as long as you configure this correctly.
 
-Combine and Compress takes series of input files, it will cat them together and minify the result.  it will also remove the old css/js files from your html and put the new minified version in its place. none of this is very complicated, so as you can imagine, combine and compress is very simple.  combine and compress relies on an external minification tool, which you must specify.
+Combine and Compress takes series of input files, it will cat them together and minify the result.  it will also remove the old css/js files from your html and put the new minified version in its place. None of this is very complicated, so as you can imagine, combine and compress is very simple - but better than writing shell scripts for every project.  Combine and compress relies on an external minification tool, which you must specify.  
 
 here is a sample config file from one of my projects:
 
