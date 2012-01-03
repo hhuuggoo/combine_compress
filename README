@@ -3,9 +3,11 @@ config file structure:
 [{
     name : 'base'
     compressor : "java -jar test/support/yuicompressor-2.4.7.jar",
-    inputs : ['first.js', 'second.js']
-    output : 'base.min.js'
+    inputs : ['static/js/first.js', 'static/js/second.js']
+    output : 'static/js/base.min.js',
+    output_link : 'static/js/base.min.js'
     html_dirs : ['templates', 'static/html']
+    type : 'js'
 }]
 
 html between these comments will be replaced
