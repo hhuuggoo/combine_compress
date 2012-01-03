@@ -51,10 +51,11 @@ type : css or  js
   "type" : "js"}
 ]
 
-combine and compress knows which files to replace, by looking at comments you must embed in your html.   anything between <!-- start basecss --> and <!-- end basecss -->
-will be replaced with the new minified script, (of course, replace basejs with whatever name you choose in your config.
+combine and compress knows which files to replace, by looking at comments you must embed in your html.   anything between 
 
-html between these comments will be replaced
+<!-- start basecss --> and <!-- end basecss -->
+
+will be replaced with the new minified script, (of course, replace basejs with whatever name you choose in your config.
 
 This:
     <!-- start basecss -->
@@ -64,7 +65,7 @@ This:
     <link rel="stylesheet" href="/static/css/outline.css" type="text/css" >
     <link rel="stylesheet" href="/static/css/nav.css" type="text/css" >
     <!-- end basecss -->
-Becoms:
+Becomes:
     <!-- start basecss -->
     <link rel="stylesheet" href="/static/css/base.min.css" type="text/css" >
     <!-- end basecss -->	   
