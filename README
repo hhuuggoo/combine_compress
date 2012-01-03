@@ -1,26 +1,71 @@
-config file structure:
+combine and compress is a utility to help combine and minimize css and js files, for those people who don't use frameworks with those capabilities built in.  It should work with any framework, as long as you configure this correctly.
 
-[{
-    name : 'base'
-    compressor : "java -jar test/support/yuicompressor-2.4.7.jar",
-    inputs : ['static/js/first.js', 'static/js/second.js']
-    output : 'static/js/base.min.js',
-    output_link : 'static/js/base.min.js'
-    html_dirs : ['templates', 'static/html']
-    type : 'js'
-}]
+Combine and Compress takes series of input files, it will cat them together and minify the result.  it will also remove the old css/js files from your html and put the new minified version in its place. none of this is very complicated, so as you can imagine, combine and compress is very simple.  combine and compress relies on an external minification tool, which you must specify.
+
+here is a sample config file from one of my projects:
+
+name : an internal name for your minified script, this is used to identify which chunks of html need to be replaced with the new css/js
+compressor : command which will minify a file
+inputs : list of files that you wish to combine and minify
+output : output file
+output_link : output file, as it should look like in the html, this way you can embed {{site_media}}/js or whatever shortcuts you want to use in your html templates
+html_dirs : directories of html files to modify
+type : css or  js
+
+[{"name" : "basejs",
+  "compressor" : "java -jar build/yuicompressor-2.4.7.jar --type=js",
+  "inputs" : ["static/js/underscore.js",
+	      "static/js/jquery-1.6.4.min.js",
+	      "static/js/jquery.autoresize.js",
+	      "static/js/jquery-ui-1.8.16.custom.js",
+	      "static/js/tabs.js",
+	      "static/js/underscore.string.js"],
+  "output" : "static/js/base.min.js",
+  "output_link" : "/static/js/base.min.js",
+  "html_dirs" : ["templates"],
+  "type" : "js"},
+ {"name" : "basecss",
+  "compressor" : "java -jar build/yuicompressor-2.4.7.jar --type=css",
+  "inputs" : ["static/css/base.css",
+	      "static/css/skeleton.css",
+	      "static/css/layout.css",
+	      "static/css/outline.css",
+	      "static/css/nav.css"
+	     ],
+  "output" : "static/css/base.min.css",
+  "output_link" : "/static/css/base.min.css",
+  "html_dirs" : ["templates"],
+  "type" : "css"},
+ {"name" : "outlinejs",
+  "compressor" : "java -jar build/yuicompressor-2.4.7.jar --type=js",
+  "inputs" : ["static/js/localstorage.js",
+	      "static/js/model.js",
+	      "static/js/outline.js",
+	      "static/js/keybindings.js",
+	      "static/js/socket.io.js",
+	      "static/js/sockets.js"
+	     ],
+  "output" : "static/js/outline.min.js",
+  "output_link" : "/static/js/outline.min.js",
+  "html_dirs" : ["templates"],
+  "type" : "js"}
+]
+
+combine and compress knows which files to replace, by looking at comments you must embed in your html.   anything between <!-- start basecss --> and <!-- end basecss -->
+will be replaced with the new minified script, (of course, replace basejs with whatever name you choose in your config.
 
 html between these comments will be replaced
-<!-- start base -->
-    <link rel="stylesheet" type="text/css" 
-	  href="/static/themes/base/jquery.ui.all.css">
+
+This:
+    <!-- start basecss -->
     <link rel="stylesheet" href="/static/css/base.css" type="text/css" >
     <link rel="stylesheet" href="/static/css/skeleton.css" type="text/css" >
     <link rel="stylesheet" href="/static/css/layout.css" type="text/css" >
     <link rel="stylesheet" href="/static/css/outline.css" type="text/css" >
     <link rel="stylesheet" href="/static/css/nav.css" type="text/css" >
-<!-- end base -->
-<!-- start base -->
+    <!-- end basecss -->
+Becoms:
+    <!-- start basecss -->
     <link rel="stylesheet" href="/static/css/base.min.css" type="text/css" >
-<!-- end base -->
+    <!-- end basecss -->	   
 
